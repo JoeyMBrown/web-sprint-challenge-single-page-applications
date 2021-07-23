@@ -11,7 +11,6 @@ import axios from "axios";
 const App = () => {
   const defaultForm = {
     size: '',
-    sauce: '',
     pepperoni: false,
     dicedTomatos: false,
     sausage: false,
