@@ -19,16 +19,16 @@ export default function PizzaForm (props) {
 
 
 
-                <input onChange={onChangeHandler} type="radio" name="sauce" value={`${formValues.sauce}`}/>
+                <input onChange={onChangeHandler} type="radio" name="sauce" value="Original Red" checked={formValues.sauce === 'Original Red'}/>
                 <label htmlFor="sauce">Original Red</label>
 
-                <input onChange={onChangeHandler} type="radio" name="sauce" value={`${formValues.sauce}`}/>
+                <input onChange={onChangeHandler} type="radio" name="sauce" value="Garlic Ranch" checked={formValues.sauce === 'Garlic Ranch'}/>
                 <label htmlFor="sauce">Garlic Ranch</label>
 
-                <input onChange={onChangeHandler} type="radio" name="sauce" value={`${formValues.sauce}`}/>
+                <input onChange={onChangeHandler} type="radio" name="sauce" value="BBQ Sauce" checked={formValues.sauce === 'BBQ Sauce'}/>
                 <label htmlFor="sauce">BBQ Sauce</label>
 
-                <input onChange={onChangeHandler} type="radio" name="sauce" value={`${formValues.sauce}`}/>
+                <input onChange={onChangeHandler} type="radio" name="sauce" value="Spinach Alfredo" checked={formValues.sauce === 'Spinach Alfredo'}/>
                 <label htmlFor="sauce">Spinach Alfredo</label>
 
 

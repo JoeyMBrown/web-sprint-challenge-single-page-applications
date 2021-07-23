@@ -24,7 +24,7 @@ const App = () => {
     threeCheese: false,
     onions: false,
     pineapple: false,
-    greenpepper: false,
+    greenPepper: false,
     extraCheese: false,
     glutenFreeCrust: false,
     specialInstructions: '',
@@ -34,8 +34,8 @@ const App = () => {
 
   function onChangeHandler(e) {
     const { name, value, checked, type} = e.target;
-    const valueToChange = type === 'text' || type === 'select-one' ? value : checked;
-    console.log(e.target.type)
+    const valueToChange = type === 'text' || type === 'select-one' || type === 'radio' ? value : checked;
+    console.log(e.target.value)
     // setFormErrors(name, valueToChange); //Call setFormErrors with the name of the event, and the value to use (use) or (checked);
     setFormValues({ ...formValues, [name]: valueToChange}); //Pass in a copy of the current form values, the updated key, and value.
     console.log(formValues);
