@@ -1,11 +1,26 @@
 import React from "react";
+import { Switch, Route} from "react-router-dom";
+import Header from "./Components/Header";
+import HomePage from "./Pages/HomePage";
+import CompletedOrder from "./Pages/CompletedOrder";
+import { galleryList } from "./Data/dummydata";
+
 
 const App = () => {
   return (
-    <>
-      <h1>Lambda Eats</h1>
-      <p>You can remove this code and create your own header</p>
-    </>
+    <div>
+      <Header />
+
+      <Switch>
+        <Route path="/completed-order">
+          <CompletedOrder />
+        </Route>
+
+        <Route path="/">
+          <HomePage galleryList={galleryList} />
+        </Route>
+      </Switch>
+    </div>
   );
 };
 export default App;
