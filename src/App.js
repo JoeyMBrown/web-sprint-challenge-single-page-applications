@@ -29,7 +29,6 @@ const App = () => {
     extraCheese: false,
     glutenFreeCrust: false,
     specialInstructions: '',
-    size: '',
     name: ''
     //sauce: ''
   }
