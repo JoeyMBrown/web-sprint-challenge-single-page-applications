@@ -6,6 +6,8 @@ import CompletedOrder from "./Pages/CompletedOrder";
 import PizzaForm from "./Pages/PizzaForm";
 import { galleryList } from "./Data/dummydata";
 import axios from "axios";
+import * as yup from 'yup';
+import schema from "./Validation/formSchema";
 
 
 const App = () => {
@@ -27,17 +29,28 @@ const App = () => {
     extraCheese: false,
     glutenFreeCrust: false,
     specialInstructions: '',
+    size: '',
     name: ''
+    //sauce: ''
   }
   const [formValues, setFormValues] = useState(defaultForm);
+  const [errors, setErrors] = useState(defaultForm);
+  const [disabled, setDisabled] = useState(true);
+
+  const setFormErrors = (name, value) => { 
+    yup
+      .reach(schema, name) //Reach into schema, look at the key (name)
+      .validate(value) // Look at the value associated with the key, does it pass the tests?
+      .then(() => setErrors({ ...errors, [name]: "" })) //if it validates, reset errors to default
+      .catch((err) => setErrors({ ...errors, [name]: err.errors[0] })); //if it fails to validate, update the key with the defined error in schema
+  };
+
 
   function onChangeHandler(e) {
     const { name, value, checked, type} = e.target;
     const valueToChange = type === 'text' || type === 'select-one' || type === 'radio' ? value : checked;
-    console.log(e.target.value)
-    // setFormErrors(name, valueToChange); //Call setFormErrors with the name of the event, and the value to use (use) or (checked);
+    setFormErrors(name, valueToChange); //Call setFormErrors with the name of the event, and the value to use (use) or (checked);
     setFormValues({ ...formValues, [name]: valueToChange}); //Pass in a copy of the current form values, the updated key, and value.
-    console.log(formValues);
   }
  
   function onSubmit(e) {
@@ -51,13 +64,21 @@ const App = () => {
       .catch(err => console.log(err));
   }
 
+  useEffect(() => {
+    schema.isValid(formValues).then((valid) => setDisabled(!valid));
+  }, [formValues]);
+
   return (
     <div>
       <Header />
+      <div style={{color: 'red'}}>
+        <div>{errors.name}</div>
+        <div>{errors.size}</div>
+      </div>
 
       <Switch>
         <Route path="/pizza">
-          <PizzaForm formValues={formValues} onSubmit={onSubmit} onChangeHandler={onChangeHandler}/>
+          <PizzaForm formValues={formValues} onSubmit={onSubmit} onChangeHandler={onChangeHandler} disabled={disabled}/>
         </Route>
 
         <Route path="/completed-order">

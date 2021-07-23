@@ -1,7 +1,7 @@
 import TopImage from "../Components/TopImage";
 
 export default function PizzaForm (props) {
-    const { formValues, onChangeHandler, onSubmit } = props;
+    const { formValues, onChangeHandler, onSubmit, disabled } = props;
     return (
         <div>
             <h2>Build Your Own Pizza</h2>
@@ -84,7 +84,7 @@ export default function PizzaForm (props) {
 
                 <input onChange={onChangeHandler} type="text" id="name-input" name="name" placeholder="Name" value={`${formValues.name}`}/>
 
-                <button id="order-button" onClick={onSubmit}>Add to Order</button>
+                <button id="order-button" disabled={disabled} onClick={onSubmit}>Add to Order</button>
             </form>
         </div>
     )
